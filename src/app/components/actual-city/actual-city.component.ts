@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CurrentPositionService } from 'src/app/services/current_position/current-position.service';
-import { async } from '@angular/core/testing';
  
  
 @Component({
@@ -24,6 +23,6 @@ export class ActualCityComponent implements OnInit {
       this.latitude=resp['latitud']
       this.longitude=resp['longitud']
     } )
-    .catch( error => console.log('Hay un error'));
+    .catch( () => console.log('Hay un error'));
   }
 }

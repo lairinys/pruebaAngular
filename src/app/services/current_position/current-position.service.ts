@@ -1,29 +1,25 @@
 import { Injectable } from '@angular/core';
-
+ 
 @Injectable({
   providedIn: 'root'
 })
 export class CurrentPositionService {
-
-  public latitude: number
-  public longitude: number
-
+ 
   constructor() {
-    this.getCurrentLocation()
-    console.log(this.latitude)
   }
-
-  public getCurrentLocation() {
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.setValues(position) 
-      }); 
-    }
+ 
+getCurrentLocation() {
+    return new Promise ( resolve => {
+      if ('geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          const posicionActual = {
+            latitud: position.coords.latitude,
+            longitud: position.coords.longitude
+          };
+          resolve( posicionActual );
+        });
+      }
+    });
   }
-
-  public setValues(position: Position){
-    this.latitude = position.coords.latitude
-    this.longitude = position.coords.longitude   
-  }
-
+ 
 }
